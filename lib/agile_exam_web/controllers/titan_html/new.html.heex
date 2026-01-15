@@ -1,0 +1,27 @@
+<div class="space-y-6">
+  <h1 class="text-2xl font-bold">Add Titan</h1>
+
+  <.form
+    :let={f}
+    for={@changeset}
+    as={:titan}
+    action={~p"/titans"}
+    id="titan-form"
+    class="space-y-4"
+  >
+    <.input field={f[:name]} type="text" label="Name" placeholder="Enter titan name" required />
+    <.input
+      field={f[:power]}
+      type="number"
+      step="0.01"
+      label="Power"
+      placeholder="Enter power level"
+      required
+    />
+    <.input field={f[:is_special]} type="checkbox" label="Is special?" />
+    <div class="flex gap-4 items-center">
+      <.button type="submit">Save Titan</.button>
+      <a href={~p"/titans"} class="link">Cancel</a>
+    </div>
+  </.form>
+</div>

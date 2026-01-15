@@ -1,0 +1,37 @@
+<div class="space-y-6">
+  <h1 class="text-2xl font-bold">Add Student Squad</h1>
+
+  <.form
+    :let={f}
+    for={@changeset}
+    as={:student_squad}
+    action={~p"/student_squads"}
+    id="student-squad-form"
+    class="space-y-4"
+  >
+    <.input field={f[:name]} type="text" label="Name" placeholder="Enter squad name" required />
+    <.input
+      field={f[:num_members]}
+      type="number"
+      label="Number of members"
+      placeholder="Enter number of members"
+      required
+    />
+    <.input
+      field={f[:group]}
+      type="select"
+      label="Group"
+      prompt="Select a group"
+      options={[
+        {"Scout", "scout"},
+        {"Garrison", "garrison"},
+        {"Police", "police"}
+      ]}
+    />
+    <.input field={f[:state]} type="checkbox" label="Active?" />
+    <div class="flex gap-4 items-center">
+      <.button type="submit">Save Squad</.button>
+      <a href={~p"/student_squads"} class="link">Cancel</a>
+    </div>
+  </.form>
+</div>

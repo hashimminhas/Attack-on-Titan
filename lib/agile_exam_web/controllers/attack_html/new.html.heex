@@ -1,0 +1,43 @@
+<div class="space-y-6">
+  <h1 class="text-2xl font-bold">Simulate Attack</h1>
+
+  <p class="text-gray-600">
+    Simulate an attack on the walls to estimate potential chances of survival.
+  </p>
+
+  <.form for={%{}} action={~p"/simulate_attack"} method="post" id="attack-form">
+    <.button type="submit">simulate</.button>
+  </.form>
+
+  <%= if @result do %>
+    <div
+      id="result"
+      class={[
+        "p-4 rounded-lg border-2 font-semibold",
+        if(String.contains?(@result, "Victory"),
+          do: "bg-green-100 border-green-500 text-green-800",
+          else: ""
+        ),
+        if(String.contains?(@result, "Defeat"),
+          do: "bg-red-100 border-red-500 text-red-800",
+          else: ""
+        ),
+        if(String.contains?(@result, "Pyrrhic"),
+          do: "bg-yellow-100 border-yellow-500 text-yellow-800",
+          else: ""
+        ),
+        if(String.contains?(@result, "cannot happen"),
+          do: "bg-gray-100 border-gray-500 text-gray-800",
+          else: ""
+        )
+      ]}
+    >
+      {@result}
+    </div>
+  <% end %>
+
+  <div class="flex gap-4">
+    <a href={~p"/titans"} class="link">View Titans</a>
+    <a href={~p"/student_squads"} class="link">View Student Squads</a>
+  </div>
+</div>

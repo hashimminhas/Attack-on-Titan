@@ -1,0 +1,53 @@
+<div class="space-y-6">
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-bold">Student Squads</h1>
+    <a href={~p"/student_squads/new"} class="btn btn-primary">Add Student Squad</a>
+  </div>
+
+  <%= if @squads == [] do %>
+    <p class="text-gray-500 italic">No student squads in the database yet.</p>
+  <% else %>
+    <div class="overflow-x-auto">
+      <table class="table table-zebra w-full">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Members</th>
+            <th>Group</th>
+            <th>State</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= for s <- @squads do %>
+            <tr>
+              <td>{s.name}</td>
+              <td>{s.num_members}</td>
+              <td>
+                <%= cond do %>
+                  <% s.group == "scout" -> %>
+                    <span class="badge badge-info">Scout</span>
+                  <% s.group == "garrison" -> %>
+                    <span class="badge badge-warning">Garrison</span>
+                  <% true -> %>
+                    <span class="badge badge-secondary">Police</span>
+                <% end %>
+              </td>
+              <td>
+                <%= if s.state do %>
+                  <span class="badge badge-success">Active</span>
+                <% else %>
+                  <span class="badge badge-error">Inactive</span>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+
+  <div class="flex gap-4">
+    <a href={~p"/titans"} class="link">View Titans</a>
+    <a href={~p"/simulate_attack"} class="link">Simulate Attack</a>
+  </div>
+</div>
